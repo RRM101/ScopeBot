@@ -13,9 +13,6 @@ async def on_ready():
     print('ScopeBot is ready')
     game = discord.Game("Looking at the stars...")
     await client.change_presence(status=discord.Status.online, activity=game)
-    #await client.change_presence(
-        #activity=discord.Game(name="Looking at the stars..."))
-
 
 # the thing after async def is the command that you put on discord | this a test command
 @client.command(brief='This is the brief description', description='This is the full description')
@@ -45,7 +42,7 @@ async def credits(ctx):
     await ctx.send('The logo of the stable bot is made by 0x010C https://commons.wikimedia.org/wiki/User:0x010C')
 
 # secret
-@client.command()
+@client.command(hidden=True)
 async def secret(ctx):
     print('someone has used the secret command!')
     await ctx.send('Secret text has been put on the console of the bot which you cant see')
@@ -83,7 +80,8 @@ async def _8ball(ctx, *, question):
                  "My reply is no.",
                  "My sources say no.",
                  "Outlook not so good.",
-                 "Very doubtful."]
+                 "Very doubtful.",
+                 "Your mom gay"]
     await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
 
 
