@@ -1,2 +1,2 @@
 # ScopeBot
-A fun bot in discord.py
+A fun bot made in discord.py
