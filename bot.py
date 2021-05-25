@@ -42,7 +42,7 @@ async def credits(ctx):
     await ctx.send('The logo of the stable bot is made by 0x010C https://commons.wikimedia.org/wiki/User:0x010C')
 
 # secret
-@client.command()
+@client.command(hidden=True)
 async def secret(ctx):
     print('someone has used the secret command!')
     await ctx.send('Secret text has been put on the console of the bot which you cant see')
@@ -80,7 +80,8 @@ async def _8ball(ctx, *, question):
                  "My reply is no.",
                  "My sources say no.",
                  "Outlook not so good.",
-                 "Very doubtful."]
+                 "Very doubtful.",
+                 "Your mom gay"]
     await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
 
 
