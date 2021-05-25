@@ -13,9 +13,6 @@ async def on_ready():
     print('ScopeBot is ready')
     game = discord.Game("Looking at the stars...")
     await client.change_presence(status=discord.Status.online, activity=game)
-    #await client.change_presence(
-        #activity=discord.Game(name="Looking at the stars..."))
-
 
 # the thing after async def is the command that you put on discord | this a test command
 @client.command(brief='This is the brief description', description='This is the full description')
