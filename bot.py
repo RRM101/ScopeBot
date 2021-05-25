@@ -128,4 +128,4 @@ async def troll(ctx):
     await ctx.send('https://tenor.com/view/trollface-lol-laugh-gif-5432260')
 
 #put your token here
-client.run('ODIzNDM4MzQzMjMyNTUyOTkw.YFg0tw.94j_6fu9IlItAJKON2lPDRCYzz4')
+client.run('YOURBOTTOKENHERE')
