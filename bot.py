@@ -44,8 +44,10 @@ async def credits(ctx):
                        description="Credits for the code/images used in the bot")
     em.add_field(name="Image credits", value='The logo of the stable bot is made by 0x010C '
                                              'https://commons.wikimedia.org/wiki/User:0x010C')
+    em.add_field(name="Code credits", value='the bot is coded and maintained by RickRollMaster101 '
+                                            'https://github.com/RickRollMaster101/ScopeBot')
     await ctx.send(embed=em)
-
+    
 
 # secret
 @client.command(hidden=True)
@@ -88,8 +90,7 @@ async def _8ball(ctx, *, question):
                  "My reply is no.",
                  "My sources say no.",
                  "Outlook not so good.",
-                 "Very doubtful.",
-                 "Your mom gay"]
+                 "Very doubtful."]
     await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
 
 
@@ -117,12 +118,12 @@ async def ban(ctx, member: discord.User = None, reason=None):
         await ctx.channel.send("You cannot ban yourself")
         return
     if reason is None:
-        reason = "For being a idiot!"
+        reason = "being a idiot!"
     message = f"You have been banned from {ctx.guild.name} for {reason}"
     await member.send(message)
     await ctx.guild.ban(member, reason=reason)
-    await ctx.channel.send(f"{member} is banned! by {ctx.author.name}")
-
+    await ctx.channel.send(f"{member.mention} is banned! by {ctx.author.name} {reason}")
+    return
 
 @client.command(aliases=['pardon'], brief='Unbans the user', description='Unbans the user from this server')
 @commands.has_permissions(ban_members=True)
