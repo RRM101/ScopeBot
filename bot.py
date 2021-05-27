@@ -3,9 +3,8 @@ import discord
 from pretty_help import PrettyHelp
 from discord.ext import commands
 
-
-client = commands.Bot(command_prefix=';', help_command=PrettyHelp(no_category = 'Commands')) #, help_command = help_command
-
+client = commands.Bot(command_prefix=';',
+                      help_command=PrettyHelp(no_category='Commands'))  # , help_command = help_command
 
 
 @client.event
@@ -13,6 +12,7 @@ async def on_ready():
     print('ScopeBot is ready')
     game = discord.Game("Looking at the stars...")
     await client.change_presence(status=discord.Status.online, activity=game)
+
 
 # the thing after async def is the command that you put on discord | this a test command
 @client.command(brief='This is the brief description', description='This is the full description')
@@ -28,18 +28,24 @@ async def on_command_error(ctx, error):
         print(f'{ctx.message.author} used an invalid command "{ctx.message.content}"')
     if isinstance(error, commands.MissingPermissions):
         await ctx.send('You dont have permission to do that!')
-        print(f'{ctx.message.author} is trying to execute a command which they done have permission to "{ctx.message.content}"')
+        print(
+            f'{ctx.message.author} is trying to execute a command which they done have permission to "{ctx.message.content}"')
 
 
-
-#b e a n
+# b e a n
 @client.command(brief='b e a n', description='b e a n')
-async def bean(ctx, member : discord.Member, *, arg):
+async def bean(ctx, member: discord.Member, *, arg):
     await ctx.send(f'{member.mention} has been beaned! For: {arg}')
+
 
 @client.command(aliases=['attribution'])
 async def credits(ctx):
-    await ctx.send('The logo of the stable bot is made by 0x010C https://commons.wikimedia.org/wiki/User:0x010C')
+    em = discord.Embed(title="credits", color=discord.Color.magenta(),
+                       description="Credits for the code/images used in the bot")
+    em.add_field(name="Image credits", value='The logo of the stable bot is made by 0x010C '
+                                             'https://commons.wikimedia.org/wiki/User:0x010C')
+    await ctx.send(embed=em)
+
 
 # secret
 @client.command(hidden=True)
@@ -47,7 +53,8 @@ async def secret(ctx):
     print('someone has used the secret command!')
     await ctx.send('Secret text has been put on the console of the bot which you cant see')
 
-#someone gets rickrolled
+
+# someone gets rickrolled
 @client.command(brief='Rickrolls someone...', description='Rickrolls someone... See thier reaction!')
 async def rickroll(ctx):
     print('Someone got rickrolled!')
@@ -58,6 +65,7 @@ async def rickroll(ctx):
 @client.command(brief='Shows the ping of the bot', description='Shows the ping of the bot')
 async def ping(ctx):
     await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
+
 
 @client.command(aliases=['8ball'], brief='A game of 8ball', description='a game of 8ball **yes or no**')
 async def _8ball(ctx, *, question):
@@ -85,26 +93,36 @@ async def _8ball(ctx, *, question):
     await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
 
 
-#imagine deleting messages
+# imagine deleting messages
 @client.command(aliases=['clear'], brief='Deletes messages', description='Deletes messages in bulk')
 @commands.has_permissions(manage_messages=True)
-async def purge(ctx, amount : int):
-    await ctx.channel.purge(limit=amount +1)
+async def purge(ctx, amount: int):
+    await ctx.channel.purge(limit=amount + 1)
     print('someone is deleting messages')
+
 
 @client.command(aliases=['yeet'], brief='Kicks the user', description='Kicks the user from this server')
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, member : discord.Member, *, reason=None):
+async def kick(ctx, member: discord.Member, *, reason=None):
     await member.kick(reason=reason)
     await ctx.send(f'{member.mention} has been kicked!')
-    print(f'Someone has kicked {member}!')
+    print(f'{ctx.message.author} has kicked {member}!')
 
+
+# added some checks for ban command need to test this :)),if it works will implement for kick
 @client.command(aliases=['Rek'], brief='Bans the user', description='Bans the user from this server')
 @commands.has_permissions(ban_members=True)
-async def ban(ctx, member : discord.Member, *, reason=None):
-    await member.ban(reason=reason)
-    await ctx.send(f'{member.mention} has been banned! For: {reason}')
-    print(f'Someone has banned {member}! For: {reason}')
+async def ban(ctx, member: discord.User = None, reason=None):
+    if member == None or member == ctx.message.author:
+        await ctx.channel.send("You cannot ban yourself")
+        return
+    if reason is None:
+        reason = "For being a idiot!"
+    message = f"You have been banned from {ctx.guild.name} for {reason}"
+    await member.send(message)
+    await ctx.guild.ban(member, reason=reason)
+    await ctx.channel.send(f"{member} is banned! by {ctx.author.name}")
+
 
 @client.command(aliases=['pardon'], brief='Unbans the user', description='Unbans the user from this server')
 @commands.has_permissions(ban_members=True)
@@ -121,9 +139,11 @@ async def unban(ctx, *, member):
             print(f'Someone has unbanned {user.name}#{user.discriminator}!')
             return
 
+
 @client.command(brief='troll', description='troll')
 async def troll(ctx):
     await ctx.send('https://tenor.com/view/trollface-lol-laugh-gif-5432260')
 
-#put your token here
+
+# put your token here
 client.run('YOURBOTTOKENHERE')
