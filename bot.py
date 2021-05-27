@@ -106,8 +106,10 @@ async def purge(ctx, amount: int):
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member: discord.Member, *, reason=None):
     await member.kick(reason=reason)
-    await ctx.send(f'{member.mention} has been kicked!')
-    print(f'{ctx.message.author} has kicked {member}!')
+    await ctx.send(f'{member.mention} has been kicked for {reason}!')
+    print(f'{ctx.message.author} has kicked {member} for {reason}!')
+    message = f"You have been kicked from {ctx.guild.name} for {reason}"
+    await member.send(message)
 
 
 # added some checks for ban command need to test this :)),if it works will implement for kick
