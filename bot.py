@@ -125,6 +125,7 @@ async def ban(ctx, member: discord.User = None, reason=None):
     await member.send(message)
     await ctx.guild.ban(member, reason=reason)
     await ctx.channel.send(f"{member.mention} is banned! by {ctx.author.name} {reason}")
+    print(f'{ctx.message.author} has kicked {member} for {reason}!')
     return
 
 @client.command(aliases=['pardon'], brief='Unbans the user', description='Unbans the user from this server')
