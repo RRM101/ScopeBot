@@ -47,7 +47,7 @@ async def credits(ctx):
     em.add_field(name="Code credits", value='the bot is coded and maintained by RickRollMaster101 '
                                             'https://github.com/RickRollMaster101/ScopeBot')
     await ctx.send(embed=em)
-    
+
 
 # secret
 @client.command(hidden=True)
@@ -110,15 +110,12 @@ async def kick(ctx, member: discord.Member, *, reason=None):
     await member.kick(reason=reason)
     await ctx.send(f'{member.mention} has been kicked for {reason}!')
     print(f'{ctx.message.author} has kicked {member} for {reason}!')
-    
+
 
 # added some checks for ban command need to test this :)),if it works will implement for kick
 @client.command(aliases=['Rek'], brief='Bans the user', description='Bans the user from this server')
 @commands.has_permissions(ban_members=True)
 async def ban(ctx, member: discord.User = None, reason=None):
-    if member == None or member == ctx.message.author:
-        await ctx.channel.send("You cannot ban yourself")
-        return
     if reason is None:
         reason = "being a idiot!"
     message = f"You have been banned from {ctx.guild.name} for {reason}"
@@ -127,6 +124,7 @@ async def ban(ctx, member: discord.User = None, reason=None):
     await ctx.channel.send(f"{member.mention} is banned! by {ctx.author.name} {reason}")
     print(f'{ctx.message.author} has kicked {member} for {reason}!')
     return
+
 
 @client.command(aliases=['pardon'], brief='Unbans the user', description='Unbans the user from this server')
 @commands.has_permissions(ban_members=True)
@@ -147,6 +145,10 @@ async def unban(ctx, *, member):
 @client.command(brief='troll', description='troll')
 async def troll(ctx):
     await ctx.send('https://tenor.com/view/trollface-lol-laugh-gif-5432260')
+
+@client.command(brief='shows you a video', description='shows you a random video (more soon!)')
+async def video(ctx):
+    await ctx.send('https://cdn.discordapp.com/attachments/770206343306280970/849267760377888788/video1.mp4')
 
 
 # put your token here
