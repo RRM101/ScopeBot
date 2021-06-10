@@ -3,7 +3,7 @@ import discord
 from pretty_help import PrettyHelp
 from discord.ext import commands
 
-client = commands.Bot(command_prefix=':',
+client = commands.Bot(command_prefix=';',
                       help_command=PrettyHelp(no_category='Commands'))  # , help_command = help_command
 
 
