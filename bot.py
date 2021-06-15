@@ -3,7 +3,7 @@ import discord
 from pretty_help import PrettyHelp
 from discord.ext import commands
 
-client = commands.Bot(command_prefix=';',
+client = commands.Bot(command_prefix=':',
                       help_command=PrettyHelp(no_category='Commands'))  # , help_command = help_command
 
 
@@ -35,12 +35,12 @@ async def on_command_error(ctx, error):
 
 # b e a n
 @client.command(brief='b e a n', description='b e a n')
-async def bean(ctx, member: discord.Member, *, arg):
-    await ctx.send(f'{member.mention} has been beaned! For: {arg}')
-    print(f'{ctx.message.author} has beaned {member} for {arg}!')
+async def bean(ctx, member: discord.Member, *, reason):
+    await ctx.send(f'{member.mention} has been beaned! For: {reason}')
+    print(f'{ctx.message.author} has beaned {member} for {reason}!')
 
 
-@client.command(aliases=['attribution'])
+@client.command(aliases=['attribution'], brief='credits', description='credits')
 async def credits(ctx):
     em = discord.Embed(title="credits", color=discord.Color.magenta(),
                        description="Credits for the code/images used in the bot")
@@ -117,20 +117,18 @@ async def kick(ctx, member: discord.Member, *, reason=None):
 
 
 # added some checks for ban command need to test this :)),if it works will implement for kick
-@client.command(aliases=['Rek'], brief='Bans the user', description='Bans the user from this server')
+@client.command(aliases=['rek'], brief='Bans the user', description='Bans the user from this server')
 @commands.has_permissions(ban_members=True)
-async def ban(ctx, member: discord.User = None, reason=None):
-    if reason is None:
-        reason = "being a idiot!"
+async def ban(ctx, member: discord.Member, *, reason=None):
     message = f"You have been banned from {ctx.guild.name} for {reason}"
     await member.send(message)
     await ctx.guild.ban(member, reason=reason)
-    await ctx.channel.send(f"{member.mention} is banned! by {ctx.author.name} {reason}")
-    print(f'{ctx.message.author} has banned {member} for {reason}!')
+    await ctx.channel.send(f"{member.mention} is banned! by {ctx.author.name} for {reason}")
+    print(f'{ctx.message.author} has banned {member} for {reason}')
     return
 
 
-@client.command(aliases=['pardon'], brief='Unbans the user', description='Unbans the user from this server')
+@client.command(aliases=['pardon', 'forgive'], brief='Unbans the user', description='Unbans the user from this server')
 @commands.has_permissions(ban_members=True)
 async def unban(ctx, *, member):
     banned_users = await ctx.guild.bans()
