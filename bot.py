@@ -1,9 +1,16 @@
 import random
 import discord
+import json
+import os
 from pretty_help import PrettyHelp
 from discord.ext import commands
+with open("./config.json") as f:
+    configData = json.load(f)
 
-client = commands.Bot(command_prefix=';',
+token = configData["Token"]
+prefix = configData["Prefix"]
+
+client = commands.Bot(command_prefix=prefix,
                       help_command=PrettyHelp(no_category='Commands'))  # , help_command = help_command
 
 
@@ -154,5 +161,5 @@ async def video(ctx):
     await ctx.send('https://cdn.discordapp.com/attachments/770206343306280970/849267760377888788/video1.mp4')
     print(f'{ctx.message.author} wants to watch a video!')
 
-# put your token here
-client.run('YOURBOTTOKENHERE')
+# put your bot token in config.json
+client.run(token)
