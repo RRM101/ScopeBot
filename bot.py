@@ -1,7 +1,6 @@
 import random
 import discord
 import json
-import os
 from pretty_help import PrettyHelp
 from discord.ext import commands
 with open("./config.json") as f:
@@ -26,16 +25,24 @@ async def on_ready():
 async def hello(ctx):
     await ctx.send('hi there!')
 
+# this command exists for testing
+@client.command()
+@commands.has_permissions(administrator=True)
+async def reply(ctx):
+    await ctx.reply('work')
 
 @client.event
 async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRole):
+        await ctx.reply('You dont have roles/permission to do that!')
+        print(f'{ctx.message.author} is trying to execute a command which they done have roles/permission to "{ctx.message.content}"')
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send(f'Put all the required arguments in the command {ctx.message.author.mention}')
+        await ctx.reply(f'Put all the required arguments in the command')
         print(f'{ctx.message.author} didnt put all the required arguments')
     if isinstance(error, commands.CommandNotFound):
         print(f'{ctx.message.author} used an invalid command "{ctx.message.content}"')
     if isinstance(error, commands.MissingPermissions):
-        await ctx.send('You dont have permission to do that!')
+        await ctx.reply('You dont have permission to do that!')
         print(
             f'{ctx.message.author} is trying to execute a command which they done have permission to "{ctx.message.content}"')
 
@@ -158,7 +165,9 @@ async def troll(ctx):
 
 @client.command(brief='shows you a video', description='shows you a random video (more soon!)')
 async def video(ctx):
-    await ctx.send('https://cdn.discordapp.com/attachments/770206343306280970/849267760377888788/video1.mp4')
+    videos = ['https://cdn.discordapp.com/attachments/770206343306280970/849267760377888788/video1.mp4',
+              'https://cdn.discordapp.com/attachments/834713618028691466/856442337789476874/video2.mp4']
+    await ctx.send(random.choice(videos))
     print(f'{ctx.message.author} wants to watch a video!')
 
 # put your bot token in config.json
