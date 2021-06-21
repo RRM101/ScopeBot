@@ -66,7 +66,7 @@ async def secret(ctx):
 
 
 # someone gets rickrolled
-@client.command(brief='Rickrolls someone...', description='Rickrolls someone... See thier reaction!')
+@client.command(brief='Rickrolls someone...', description='Rickrolls someone... See their reaction!')
 async def rickroll(ctx):
     print(f'{ctx.message.author} got rickrolled!')
     await ctx.send('https://tenor.com/view/dance-moves-dancing-singer-groovy-gif-17029825')
