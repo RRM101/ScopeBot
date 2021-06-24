@@ -83,7 +83,7 @@ async def rickroll(ctx):
 @client.command(brief='Shows the ping of the bot', description='Shows the ping of the bot')
 async def ping(ctx):
     await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
-    print(f'{ctx.message.author} want to know the ping of the bot!')
+    print(f'{ctx.message.author} wants to know the ping of the bot!')
 
 
 @client.command(aliases=['8ball'], brief='A game of 8ball', description='a game of 8ball **yes or no**')
