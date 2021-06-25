@@ -30,6 +30,13 @@ async def hello(ctx):
 @commands.has_permissions(administrator=True)
 async def reply(ctx):
     await ctx.reply('work')
+    print(f'{ctx.message.author} used the reply command')
+
+# typo go brr
+@client.command(hidden=True)
+async def hellp(ctx):
+    await ctx.reply(f'You made a typo <a:lmao:857570800395354123>,  do {prefix}hello or {prefix}help')
+    print(f'{ctx.message.author} made a typo lol')
 
 @client.event
 async def on_command_error(ctx, error):
@@ -56,9 +63,9 @@ async def bean(ctx, member: discord.Member, *, reason):
 
 @client.command(aliases=['attribution'], brief='credits', description='credits')
 async def credits(ctx):
-    em = discord.Embed(title="credits", color=discord.Color.magenta(),
+    em = discord.Embed(title="Credits", color=discord.Color.magenta(),
                        description="Credits for the code/images used in the bot")
-    em.add_field(name="Image credits", value='The logo of the stable bot is made by 0x010C '
+    em.add_field(name="Image credits", value='The logo of the main bot is made by 0x010C '
                                              'https://commons.wikimedia.org/wiki/User:0x010C')
     em.add_field(name="Code credits", value='the bot is coded and maintained by RickRollMaster101 '
                                             'https://github.com/RickRollMaster101/ScopeBot')
