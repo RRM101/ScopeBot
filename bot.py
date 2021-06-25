@@ -1,7 +1,6 @@
 import random
 import discord
 import json
-from pretty_help import PrettyHelp
 from discord.ext import commands
 with open("./config.json") as f:
     configData = json.load(f)
@@ -9,13 +8,12 @@ with open("./config.json") as f:
 token = configData["Token"]
 prefix = configData["Prefix"]
 
-client = commands.Bot(command_prefix=prefix,
-                      help_command=PrettyHelp(no_category='Commands'))  # , help_command = help_command
+client = commands.Bot(command_prefix=prefix)  # , help_command = help_command
 
 
 @client.event
 async def on_ready():
-    print('ScopeBot is ready')
+    print('>> ScopeBot is ready <<')
     game = discord.Game("Looking at the stars...")
     await client.change_presence(status=discord.Status.online, activity=game)
 
