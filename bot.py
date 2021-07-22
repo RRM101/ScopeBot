@@ -1,6 +1,7 @@
 import random
 import discord
 import json
+from aiohttp import ClientSession
 from pretty_help import PrettyHelp
 from discord.ext import commands
 with open("./config.json") as f:
@@ -77,6 +78,17 @@ async def credits(ctx):
 async def secret(ctx):
     print('someone has used the secret command!')
     await ctx.send('Secret text has been put on the console of the bot which you cant see')
+
+# random
+# idk if it works so creating pr and test it 
+@client.command()
+async def random(ctx):
+   async with aiohttp.ClientSession() as session:
+      request = await session.get('https://source.unsplash.com/random/200x200?sig=incrementingIdentifier')
+      randomjson = await request.json()
+   embed = discord.Embed(title="Randoms!", color=discord.Color.purple()) # Create embed
+   embed.set_image(url=randomjson['link']) # Set the embed image to the value of the 'link' key
+   await ctx.send(embed=embed) # Send the embed
 
 
 # someone gets rickrolled
