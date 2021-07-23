@@ -82,6 +82,55 @@ async def secret(ctx):
     print('someone has used the secret command!')
     await ctx.send('Secret text has been put on the console of the bot which you cant see')
 
+# random
+@client.command(brief='Random Image', description='Shows you a random image')
+async def image(ctx):
+    variable = [
+    "https://picsum.photos/200",
+    "https://picsum.photos/420",
+    "https://picsum.photos/400",
+    "https://picsum.photos/250",
+    "https://picsum.photos/430",
+    "https://picsum.photos/440",
+    "https://picsum.photos/450",
+    "https://picsum.photos/460",
+    "https://picsum.photos/470",
+    "https://picsum.photos/480",
+    "https://picsum.photos/490",
+    "https://picsum.photos/445",
+    "https://picsum.photos/880",
+    "https://picsum.photos/290",
+    "https://picsum.photos/345",
+    "https://picsum.photos/423",
+    "https://picsum.photos/456",
+    "https://picsum.photos/654",
+    "https://picsum.photos/670",
+    "https://picsum.photos/970",
+    "https://picsum.photos/230",
+    "https://picsum.photos/627",
+    "https://picsum.photos/623",
+    "https://picsum.photos/622",
+    "https://picsum.photos/621",
+    "https://picsum.photos/983",
+    "https://source.unsplash.com/random/800x600",
+    "https://source.unsplash.com/random/810x610",
+    "https://source.unsplash.com/random/1920x1080",
+    "https://source.unsplash.com/random/200x400",
+    "https://source.unsplash.com/random/400x600",
+    "https://source.unsplash.com/random/500x500",
+    "https://source.unsplash.com/random/800x700",
+    "https://source.unsplash.com/random/100x500",
+    "https://source.unsplash.com/random/400x500",
+    "https://source.unsplash.com/random/700x500",
+    "https://source.unsplash.com/random/200x300",
+    "https://source.unsplash.com/random/150x150",
+    "https://source.unsplash.com/random/540x40",
+    "https://source.unsplash.com/random/900x500",
+    "https://source.unsplash.com/random/123x123",]
+    print(f'{ctx.message.author} wants to see a random image')
+    await ctx.send(f'{random.choice(variable)}')
+
+
 # someone gets rickrolled
 @client.command(brief='Rickrolls someone...', description='Rickrolls someone... See their reaction!')
 async def rickroll(ctx):
