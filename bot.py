@@ -40,6 +40,9 @@ async def hellp(ctx):
 
 @client.event
 async def on_command_error(ctx, error):
+    if isinstance(error, commands.BotMissingPermissions):
+        await ctx.reply('I dont have permission to do that')
+        print('A command has been executed but I dont have perms to do that')
     if isinstance(error, commands.MissingRole):
         await ctx.reply('You dont have roles/permission to do that!')
         print(f'{ctx.message.author} is trying to execute a command which they done have roles/permission to "{ctx.message.content}"')
@@ -53,10 +56,11 @@ async def on_command_error(ctx, error):
         print(
             f'{ctx.message.author} is trying to execute a command which they done have permission to "{ctx.message.content}"')
 
-
 # b e a n
 @client.command(brief='b e a n', description='b e a n')
-async def bean(ctx, member: discord.Member, *, reason):
+async def bean(ctx, member: discord.Member, *, reason='No reason given'):
+    message = f"You have been beaned from {ctx.guild.name} for {reason}"
+    await member.send(message)
     await ctx.send(f'{member.mention} has been beaned! For: {reason}')
     print(f'{ctx.message.author} has beaned {member} for {reason}!')
 
@@ -77,7 +81,6 @@ async def credits(ctx):
 async def secret(ctx):
     print('someone has used the secret command!')
     await ctx.send('Secret text has been put on the console of the bot which you cant see')
-
 
 # someone gets rickrolled
 @client.command(brief='Rickrolls someone...', description='Rickrolls someone... See their reaction!')
@@ -129,7 +132,7 @@ async def purge(ctx, amount: int):
 
 @client.command(aliases=['yeet'], brief='Kicks the user', description='Kicks the user from this server')
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, member: discord.Member, *, reason=None):
+async def kick(ctx, member: discord.Member, *, reason='No reason given'):
     message = f"You have been kicked from {ctx.guild.name} for {reason}"
     await member.send(message)
     await member.kick(reason=reason)
@@ -137,10 +140,10 @@ async def kick(ctx, member: discord.Member, *, reason=None):
     print(f'{ctx.message.author} has kicked {member} for {reason}!')
 
 
-# added some checks for ban command need to test this :)),if it works will implement for kick
+# ban command
 @client.command(aliases=['rek'], brief='Bans the user', description='Bans the user from this server')
 @commands.has_permissions(ban_members=True)
-async def ban(ctx, member: discord.Member, *, reason=None):
+async def ban(ctx, member: discord.Member, *, reason='No reason given'):
     message = f"You have been banned from {ctx.guild.name} for {reason}"
     await member.send(message)
     await ctx.guild.ban(member, reason=reason)
