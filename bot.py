@@ -1,7 +1,7 @@
 import random
 import discord
 import json
-from pretty_help import PrettyHelp
+import aiohttp
 from discord.ext import commands
 with open("./config.json") as f:
     configData = json.load(f)
@@ -9,8 +9,11 @@ with open("./config.json") as f:
 token = configData["Token"]
 prefix = configData["Prefix"]
 
-client = commands.Bot(command_prefix=prefix,
-                      help_command=PrettyHelp(no_category='Commands'))  # , help_command = help_command
+# changes the no category name to Commands
+help_command = commands.DefaultHelpCommand(
+    no_category = 'Commands')
+
+client = commands.Bot(command_prefix=prefix, help_command = help_command)
 
 
 @client.event
@@ -64,6 +67,16 @@ async def bean(ctx, member: discord.Member, *, reason='No reason given'):
     await ctx.send(f'{member.mention} has been beaned! For: {reason}')
     print(f'{ctx.message.author} has beaned {member} for {reason}!')
 
+@client.command()
+async def meme(ctx):
+    embed = discord.Embed(title="**MEME**", description="meme from r/dankmemes")
+
+    async with aiohttp.ClientSession() as cs:
+        async with cs.get('https://www.reddit.com/r/dankmemes/new.json?sort=hot') as r:
+            res = await r.json()
+            embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+            await ctx.send(embed=embed)
+
 
 @client.command(aliases=['attribution'], brief='credits', description='credits')
 async def credits(ctx):
@@ -83,7 +96,7 @@ async def secret(ctx):
     await ctx.send('Secret text has been put on the console of the bot which you cant see')
 
 # random
-@client.command(brief='Random Image', description='Shows you a random image')
+@client.command(brief='Shows you a random image', description='Shows you a random image')
 async def image(ctx):
     variable = [
     "https://picsum.photos/200",
@@ -129,7 +142,6 @@ async def image(ctx):
     "https://source.unsplash.com/random/123x123",]
     print(f'{ctx.message.author} wants to see a random image')
     await ctx.send(f'{random.choice(variable)}')
-
 
 # someone gets rickrolled
 @client.command(brief='Rickrolls someone...', description='Rickrolls someone... See their reaction!')
