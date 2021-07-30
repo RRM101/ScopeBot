@@ -10,6 +10,7 @@ https://tinyurl.com/scopebot and https://dsc.gg/myscopebot
 
 
 # Changelog
+Most recent changes will be here
 
 * Added meme command
 
