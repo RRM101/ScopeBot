@@ -7,9 +7,8 @@ https://tinyurl.com/scopebot and https://dsc.gg/myscopebot
 * Ask for support for my bot in my server https://discord.gg/VbBgMw5pyM in #scopebot-help
 
 
-# Changelog
+# Changes
 Most recent changes will be here
 
-* Added meme command
+* Added meme2 command (memes from a different subreddit)
 
-* Removed Pretty Help
