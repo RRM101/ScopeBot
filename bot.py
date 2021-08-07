@@ -25,8 +25,7 @@ async def hellp(ctx):
 
 
 # put your bot token in config.json
-client.load_extension('cogs.events')
-client.load_extension('cogs.moderation')
-client.load_extension('cogs.fun')
-client.load_extension('cogs.random')
+for filename in os.listdir('./cogs'):           # Loads as an extension 
+  if filename.endswith('.py'):                                         # every file 
+    bot.load_extension(f'cogs.{filename[:-3]}')                                    # that ends in .py 
 client.run(token)
