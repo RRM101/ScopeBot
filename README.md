@@ -10,5 +10,6 @@ https://tinyurl.com/scopebot and https://dsc.gg/myscopebot
 # Changes
 Most recent changes will be here
 
-* Added meme2 command (memes from a different subreddit)
+* Added cogs
 
+* Added meme2 command (memes from a different subreddit)
