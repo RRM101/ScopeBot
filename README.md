@@ -11,5 +11,5 @@ https://tinyurl.com/scopebot and https://dsc.gg/myscopebot
 Most recent changes will be here
 
 * Added webshot command
-
-* Added sus command
+* Added sus command<br>
+(Both features were the idea of @agam778)
