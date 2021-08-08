@@ -6,6 +6,13 @@ class random(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @client.command()
+    async def exec(ctx, *, cmd=None):
+        try:
+            await ctx.send(f'Your bot friend executed your command --> {cmd}\n\nOutput: {exec(cmd)}') # Command to get the output of some python code
+        except:
+            await ctx.send(f'Your bot friend could not execute an invalid command --> {cmd}')   
+     
     @commands.command(brief='This is the brief description', description='This is the full description')
     async def hello(self, ctx):
         await ctx.send('hi there!')
