@@ -1,2 +1,3 @@
 discord
 random2
+requests
