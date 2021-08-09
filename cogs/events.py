@@ -23,37 +23,6 @@ class events(commands.Cog):
             print(
                 f'{ctx.message.author} is trying to execute a command which they done have permission to "{ctx.message.content}"')
 
-        @commands.command(aliases=['pardon', 'forgive'], brief='Unbans the user',
-                        description='Unbans the user from this server')
-        @commands.has_permissions(ban_members=True)
-        async def unban(self, ctx, *, member):
-            banned_users = await ctx.guild.bans()
-            member_name, member_discriminator = member.split('#')
-
-            for ban_entry in banned_users:
-                user = ban_entry.user
-
-                if (user.name, user.discriminator) == (member_name, member_discriminator):
-                    await ctx.guild.unban(user)
-                    await ctx.send(f'Unbanned {user.name}#{user.discriminator}')
-                    print(f'{ctx.message.author} has unbanned {user.name}#{user.discriminator}!')
-                    return
-
-        @commands.command(aliases=['pardon', 'forgive'], brief='Unbans the user', description='Unbans the user from this server')
-        @commands.has_permissions(ban_members=True)
-        async def unban(self, ctx, *, member):
-            banned_users = await ctx.guild.bans()
-            member_name, member_discriminator = member.split('#')
-
-            for ban_entry in banned_users:
-                user = ban_entry.user
-
-                if (user.name, user.discriminator) == (member_name, member_discriminator):
-                    await ctx.guild.unban(user)
-                    await ctx.send(f'Unbanned {user.name}#{user.discriminator}')
-                    print(f'{ctx.message.author} has unbanned {user.name}#{user.discriminator}!')
-                    return
-
 def setup(bot):
     bot.add_cog(events(bot))
     print('Events cog loaded')
