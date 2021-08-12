@@ -4,13 +4,17 @@ from discord.ext import commands
 with open("./config.json") as f:
     configData = json.load(f)
 
+intents = discord.Intents.default()
+intents.members = True
+intents.presences = True
+
 token = configData["Token"]
 prefix = configData["Prefix"]
 
 # changes the no category name to Commands
 help_command = commands.DefaultHelpCommand(no_category = 'Help')
 
-client = commands.Bot(command_prefix=prefix, help_command = help_command)
+client = commands.Bot(command_prefix=prefix, help_command = help_command, intents=intents)
 
 @client.event
 async def on_ready():
