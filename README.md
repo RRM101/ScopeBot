@@ -10,6 +10,4 @@ https://tinyurl.com/scopebot and https://dsc.gg/myscopebot
 # Changes
 Most recent changes will be here
 
-* Added webshot command
-
-* Added sus command
+* Added serverinfo command
