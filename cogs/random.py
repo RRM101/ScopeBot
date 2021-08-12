@@ -6,17 +6,6 @@ class random(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(brief='This is the brief description', description='This is the full description')
-    async def hello(self, ctx):
-        await ctx.send('hi there!')
-
-    @commands.command()
-    @commands.has_permissions(administrator=True)
-    async def reply(self, ctx):
-        await ctx.reply('work')
-        print(f'{ctx.message.author} used the reply command')
-
-
     @commands.command(aliases=['attribution'], brief='credits', description='credits')
     async def credits(self, ctx):
         em = discord.Embed(title="Credits", color=discord.Color.magenta(),
@@ -26,6 +15,23 @@ class random(commands.Cog):
         em.add_field(name="Code credits", value='the bot is coded and maintained by RickRollMaster101 '
                                                 'https://github.com/RickRollMaster101/ScopeBot')
         await ctx.send(embed=em)
+
+    # bugged but ok
+    @commands.command()
+    async def serverinfo(self, ctx):
+        embed = discord.Embed(title='Server info', description='A little bit bugged but ok', color=discord.Color.red())
+
+        embed.set_thumbnail(url=ctx.guild.icon_url)
+        if ctx.guild.banner:
+            embed.set_image(url=ctx.guild.banner_url_as(format='png'))
+
+        embed.add_field(name='Server name', value=ctx.guild.name)
+        embed.add_field(name='Member count', value=ctx.guild.member_count)
+        embed.add_field(name='Owner', value=f'{ctx.guild.owner}')
+        embed.add_field(name='Created at', value=ctx.guild.created_at)
+
+        await ctx.reply(embed=embed)
+
 
     @commands.command(brief='Shows you a random image', description='Shows you a random image')
     async def image(self, ctx):
@@ -85,7 +91,6 @@ class random(commands.Cog):
                   'https://cdn.discordapp.com/attachments/834713618028691466/856442337789476874/video2.mp4']
         await ctx.send(random2.choice(videos))
         print(f'{ctx.message.author} wants to watch a video!')
-
 
 def setup(bot):
     bot.add_cog(random(bot))
