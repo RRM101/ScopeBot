@@ -1,6 +1,7 @@
 from discord.ext import commands
 
-class events(commands.Cog):
+
+class Events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -23,6 +24,7 @@ class events(commands.Cog):
             print(
                 f'{ctx.message.author} is trying to execute a command which they done have permission to "{ctx.message.content}"')
 
+
 def setup(bot):
-    bot.add_cog(events(bot))
+    bot.add_cog(Events(bot))
     print('Events cog loaded')

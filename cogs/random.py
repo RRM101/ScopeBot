@@ -2,7 +2,8 @@ import random2
 import discord
 from discord.ext import commands
 
-class random(commands.Cog):
+
+class Random(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -31,7 +32,6 @@ class random(commands.Cog):
         embed.add_field(name='Created at', value=ctx.guild.created_at)
 
         await ctx.reply(embed=embed)
-
 
     @commands.command(brief='Shows you a random image', description='Shows you a random image')
     async def image(self, ctx):
@@ -92,6 +92,7 @@ class random(commands.Cog):
         await ctx.send(random2.choice(videos))
         print(f'{ctx.message.author} wants to watch a video!')
 
+
 def setup(bot):
-    bot.add_cog(random(bot))
+    bot.add_cog(Random(bot))
     print('Random cog loaded')

@@ -1,3 +1,4 @@
-discord
-random2
-requests
+discord~=1.7.3
+random2~=1.0.1
+requests~=2.26.0
+aiohttp~=3.7.4.post0

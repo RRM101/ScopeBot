@@ -4,14 +4,14 @@ import aiohttp
 import random2
 import requests
 import json
+
 with open("./config.json") as f:
     configData = json.load(f)
 
 access_key = configData["apiflashkey"]
 
 
-
-class fun(commands.Cog):
+class Fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -109,6 +109,7 @@ class fun(commands.Cog):
             await ctx.reply(file=discord.File(r'./webshots/screenshot.jpg'))
             print('Image sent')
 
+
 def setup(bot):
-    bot.add_cog(fun(bot))
+    bot.add_cog(Fun(bot))
     print('Fun cog loaded')
