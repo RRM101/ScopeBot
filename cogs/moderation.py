@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
 
-class moderation(commands.Cog):
+
+class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -16,7 +17,7 @@ class moderation(commands.Cog):
         return
 
     @commands.command(aliases=['pardon', 'forgive'], brief='Unbans the user',
-                    description='Unbans the user from this server')
+                      description='Unbans the user from this server')
     @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, *, member):
         banned_users = await ctx.guild.bans()
@@ -46,6 +47,7 @@ class moderation(commands.Cog):
         await ctx.channel.purge(limit=amount + 1)
         print(f'{ctx.message.author} is deleting messages')
 
+
 def setup(bot):
-    bot.add_cog(moderation(bot))
+    bot.add_cog(Moderation(bot))
     print('Moderation cog loaded')
