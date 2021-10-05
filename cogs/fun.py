@@ -104,7 +104,7 @@ class Fun(commands.Cog):
             with open('./webshots/screenshot.jpg', 'wb') as f:
                 f.write(req.content)
             await ctx.reply(file=discord.File(r'./webshots/screenshot.jpg'))
-            print('Image sent')
+            print('Webshot sent')
 
 
 def setup(bot):
