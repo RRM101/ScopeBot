@@ -98,14 +98,11 @@ class Fun(commands.Cog):
     @commands.command()
     async def webshot(self, ctx, website):
         async with ctx.typing():
-            print('Download Starting...')
-
             url = f'https://api.apiflash.com/v1/urltoimage?access_key={access_key}&url={website}'
             req = requests.get(url)
 
             with open('./webshots/screenshot.jpg', 'wb') as f:
                 f.write(req.content)
-            print("Download Completed!")
             await ctx.reply(file=discord.File(r'./webshots/screenshot.jpg'))
             print('Image sent')
 
