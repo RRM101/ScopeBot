@@ -82,7 +82,13 @@ class Random(commands.Cog):
 
     @commands.command(brief='Shows the ping of the bot', description='Shows the ping of the bot')
     async def ping(self, ctx):
-        await ctx.send(f'Pong! {round(self.bot.latency * 1000)}ms')
+        responses = [ctx.author.mention, f'Pong! {round(self.bot.latency * 1000)}ms',
+                     f'Pong! {round(self.bot.latency * 1000)}ms'    ,
+                     f'Pong! {round(self.bot.latency * 1000)}ms',
+                     f'Pong! {round(self.bot.latency * 1000)}ms',
+                     f'Pong! {round(self.bot.latency * 1000)}ms',]
+        #await ctx.send(f'Pong! {round(self.bot.latency * 1000)}ms')
+        await ctx.send(random2.choice(responses))
         print(f'{ctx.message.author} wants to know the ping of the bot!')
 
     @commands.command(brief='shows you a video', description='shows you a random video (more soon!)')

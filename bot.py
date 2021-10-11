@@ -30,7 +30,6 @@ async def hellp(ctx):
     await ctx.reply(f'You made a typo <a:lmao:857570800395354123>,  do {prefix}hello or {prefix}help')
     print(f'{ctx.message.author} made a typo lol')
 
-
 # put your bot token in config.json
 client.load_extension('cogs.events')
 client.load_extension('cogs.moderation')

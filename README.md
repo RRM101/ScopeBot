@@ -10,4 +10,6 @@ https://tinyurl.com/scopebot and https://dsc.gg/myscopebot
 # Changes
 Most recent changes will be here
 
-* Added serverinfo command
+* Added snipe command
+
+* easter egg with the ping command
